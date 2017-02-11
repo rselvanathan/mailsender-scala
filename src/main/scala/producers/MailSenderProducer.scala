@@ -8,7 +8,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl
 /**
   * @author Romesh Selvan
   */
-object MailSenderProducer {
+class MailSenderProducer {
 
   val host : Option[String] = sys.env.get("MAIL_HOST")
   val port : Option[String] = sys.env.get("MAIL_PORT")

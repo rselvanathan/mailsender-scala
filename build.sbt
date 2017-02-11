@@ -10,3 +10,8 @@ libraryDependencies += "org.springframework.boot" % "spring-boot-starter-mail" %
 libraryDependencies += "javax.mail" % "javax.mail-api" % "1.5.6"
 libraryDependencies += "com.amazonaws" % "aws-java-sdk-sqs" % "1.11.78"
 libraryDependencies += "com.google.inject" % "guice" % "4.1.0"
+libraryDependencies += "org.json4s" % "json4s-native_2.12" % "3.5.0"
+
+// Test
+libraryDependencies += "org.mockito" % "mockito-all" % "1.9.5" % "test"
+libraryDependencies += "org.scalatest" % "scalatest_2.12" % "3.0.0" % "test"
