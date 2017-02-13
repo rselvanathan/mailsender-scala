@@ -11,4 +11,5 @@ object SystemValues {
   val MAIL_PORT: String = sys.props.getOrElse("MAIL_PORT", sys.env.getOrElse("MAIL_PORT", throw new NullPointerException("MAIL_PORT not defined")))
   val MAIL_USERNAME: String = sys.props.getOrElse("MAIL_USERNAME", sys.env.getOrElse("MAIL_USERNAME", throw new NullPointerException("MAIL_USERNAME not defined")))
   val MAIL_PASSWORD: String = sys.props.getOrElse("MAIL_PASSWORD", sys.env.getOrElse("MAIL_PASSWORD", throw new NullPointerException("MAIL_PASSWORD not defined")))
+  val MESSAGE_RETRIEVE_DELAY: String = sys.props.getOrElse("MESSAGE_RETRIEVE_DELAY", sys.env.getOrElse("MESSAGE_RETRIEVE_DELAY", throw new NullPointerException("MESSAGE_RETRIEVE_DELAY not defined")))
 }

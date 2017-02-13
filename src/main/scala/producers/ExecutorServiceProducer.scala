@@ -2,15 +2,14 @@ package producers
 
 import java.util.concurrent.{Executors, ScheduledExecutorService}
 
-import com.google.inject.{AbstractModule, Provides}
+import org.springframework.context.annotation.{Bean, Configuration}
 
 /**
   * @author Romesh Selvan
   */
-object ExecutorServiceProducer extends AbstractModule{
+@Configuration
+object ExecutorServiceProducer {
 
-  override def configure(): Unit = {}
-
-  @Provides
+  @Bean
   def scheduledExecutor : ScheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
 }

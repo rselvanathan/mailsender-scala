@@ -2,19 +2,18 @@ package producers
 
 import java.util.Properties
 
-import com.google.inject.{AbstractModule, Provides}
 import defaults.SystemValues
+import org.springframework.context.annotation.{Bean, Configuration}
 import org.springframework.mail.MailSender
 import org.springframework.mail.javamail.JavaMailSenderImpl
 
 /**
   * @author Romesh Selvan
   */
-object MailSenderProducer extends AbstractModule{
+@Configuration
+object MailSenderProducer {
 
-  override def configure(): Unit = {}
-
-  @Provides
+  @Bean
   def mailSender : MailSender = {
     val javaMailSender = new JavaMailSenderImpl
     javaMailSender.setHost(SystemValues.MAIL_HOST)

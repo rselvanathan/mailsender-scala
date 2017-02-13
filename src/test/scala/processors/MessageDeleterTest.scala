@@ -1,6 +1,7 @@
 package processors
 
-import java.util.Properties
+import java.util
+import java.util.{Collections, Properties}
 
 import com.amazonaws.services.sqs.AmazonSQSAsyncClient
 import com.amazonaws.services.sqs.model.{DeleteMessageRequest, DeleteMessageResult, Message}
@@ -9,6 +10,7 @@ import org.scalatest.mockito.MockitoSugar
 import org.scalatest.{BeforeAndAfterAll, FunSuite, Matchers}
 import org.mockito.Mockito._
 import org.mockito.Matchers._
+
 import io.Source._
 
 /**
@@ -26,14 +28,14 @@ class MessageDeleterTest extends FunSuite with Matchers with MockitoSugar with B
   val messageDeleter = new MessageDeleter(amazonSQSClient)
 
   test("When List of messages is empty then do not delete any of the messages") {
-    messageDeleter.deleteMessages(List.empty)
+    messageDeleter.deleteMessages(Collections.emptyList())
     verify(amazonSQSClient, never).deleteMessage(any[DeleteMessageRequest])
   }
 
   test("When List of messages has items then call delete on all of the messages") {
     val receiptIdOne = "receiptIdOne"
     val receiptIdTwo = "receiptIdTwo"
-    messageDeleter.deleteMessages(List(getMessage(receiptIdOne), getMessage(receiptIdTwo)))
+    messageDeleter.deleteMessages(util.Arrays.asList(getMessage(receiptIdOne), getMessage(receiptIdTwo)))
 
     val expectedDeleteMessageRequestOne = new DeleteMessageRequest(SystemValues.AWS_SQS_QUEUE_URL, receiptIdOne)
     val expectedDeleteMessageRequestTwo = new DeleteMessageRequest(SystemValues.AWS_SQS_QUEUE_URL, receiptIdTwo)

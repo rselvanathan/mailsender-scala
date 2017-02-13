@@ -1,16 +1,18 @@
 package mail.producer
 
-import com.google.inject.Inject
 import defaults.AppType
 import defaults.AppType.ROMCHARM
 import mail.{MailSenderService, RomCharmMailService}
 import org.json4s.DefaultFormats
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.mail.MailSender
+import org.springframework.stereotype.Component
 
 /**
   * @author Romesh Selvan
   */
-@Inject
+@Component
+@Autowired
 class MailSenderServiceProducer(m : MailSender) {
 
   implicit val defaults = DefaultFormats

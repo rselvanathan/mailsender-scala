@@ -1,7 +1,6 @@
 package processors
 
 import com.amazonaws.services.sqs.model.Message
-import com.google.inject.Inject
 import defaults.AppType
 import domain.producer.EmailMessageProducer
 import mail.MailSenderService
@@ -9,18 +8,21 @@ import mail.producer.MailSenderServiceProducer
 import org.json4s.DefaultFormats
 import org.json4s.JsonAST.JValue
 import org.json4s.native.JsonMethods._
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Component
 
 /**
   * @author Romesh Selvan
   */
-@Inject
+@Component
+@Autowired
 class MessageProcessor(m : MailSenderServiceProducer) {
 
   implicit val formats = DefaultFormats
   val mailSenderServiceProducer: MailSenderServiceProducer = m
 
-  def processMessages(messages : List[Message]): Unit = {
-    messages.foreach(sendMail)
+  def processMessages(messages : java.util.List[Message]): Unit = {
+    messages.forEach(sendMail)
   }
 
   private def sendMail(message : Message) : Unit = {

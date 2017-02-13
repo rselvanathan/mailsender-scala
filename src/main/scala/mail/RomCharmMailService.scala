@@ -1,5 +1,4 @@
 package mail
-import com.google.inject.Inject
 import domain.RomCharmEmail
 import org.springframework.mail.{MailSender, SimpleMailMessage}
 
@@ -7,7 +6,6 @@ import org.springframework.mail.{MailSender, SimpleMailMessage}
 /**
   * @author Romesh Selvan
   */
-@Inject
 class RomCharmMailService(mc : MailSender) extends MailSenderService {
   type T = RomCharmEmail
 

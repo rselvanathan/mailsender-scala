@@ -1,5 +1,7 @@
 package processors
 
+import java.util.Collections
+
 import com.amazonaws.services.sqs.model.Message
 import defaults.AppType
 import domain.RomCharmEmail
@@ -25,7 +27,7 @@ class MessageProcessorTest extends FunSuite  with Matchers with MockFactory {
 
   test("When processing messages and there is nothing to process, then do nothing") {
     before
-    messageProcesser.processMessages(List.empty)
+    messageProcesser.processMessages(Collections.emptyList())
     (mailSenderService.sendMail _).verify(*).never()
   }
 
@@ -33,7 +35,7 @@ class MessageProcessorTest extends FunSuite  with Matchers with MockFactory {
     before
     val message : Message = new Message().withBody(getDefaultSQSJsonBody("ROMCHARM"))
     val expectedEmail : RomCharmEmail = getDefaultEmail
-    messageProcesser.processMessages( List (message))
+    messageProcesser.processMessages( Collections.singletonList(message))
     (mailSenderService.sendMail _).verify(expectedEmail.asInstanceOf[mailSenderService.T])
   }
 
