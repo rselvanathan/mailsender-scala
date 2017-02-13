@@ -6,8 +6,8 @@ version := "1.0.0-SNAPSHOT"
 
 scalaVersion := "2.12.1"
 
-libraryDependencies += "org.springframework.boot" % "spring-boot-starter" % "1.4.3.RELEASE"
-libraryDependencies += "org.springframework.boot" % "spring-boot-starter-mail" % "1.4.3.RELEASE"
+libraryDependencies += "org.springframework.boot" % "spring-boot-starter" % "1.5.1.RELEASE"
+libraryDependencies += "org.springframework.boot" % "spring-boot-starter-mail" % "1.5.1.RELEASE"
 libraryDependencies += "javax.mail" % "javax.mail-api" % "1.5.6"
 libraryDependencies += "com.amazonaws" % "aws-java-sdk-sqs" % "1.11.78"
 libraryDependencies += "org.json4s" % "json4s-native_2.12" % "3.5.0"
