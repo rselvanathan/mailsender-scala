@@ -6,7 +6,7 @@ import domain.RomCharmEmail
 import mail.MailSenderService
 import mail.producer.MailSenderServiceProducer
 import org.scalamock.scalatest.MockFactory
-import org.scalatest.{BeforeAndAfter, FunSuite, Matchers}
+import org.scalatest.{FunSuite, Matchers}
 
 /**
   * @author Romesh Selvan
