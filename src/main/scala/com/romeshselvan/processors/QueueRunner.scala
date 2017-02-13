@@ -3,14 +3,10 @@ package com.romeshselvan.processors
 import java.util.concurrent.{ScheduledExecutorService, TimeUnit}
 
 import com.romeshselvan.defaults.SystemValues
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Component
 
 /**
   * @author Romesh Selvan
   */
-@Component
-@Autowired
 class QueueRunner(q: QueueProcessor, s : ScheduledExecutorService) {
 
   val queueProcessor : QueueProcessor = q

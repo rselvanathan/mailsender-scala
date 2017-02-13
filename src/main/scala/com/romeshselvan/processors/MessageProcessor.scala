@@ -2,22 +2,16 @@ package com.romeshselvan.processors
 
 import com.amazonaws.services.sqs.model.Message
 import com.romeshselvan.defaults.AppType
-import com.romeshselvan.mail.MailSenderService
-import com.romeshselvan.mail.producer.MailSenderServiceProducer
-import com.romeshselvan.defaults.AppType
 import com.romeshselvan.domain.producer.EmailMessageProducer
 import com.romeshselvan.mail.MailSenderService
+import com.romeshselvan.mail.producer.MailSenderServiceProducer
 import org.json4s.DefaultFormats
 import org.json4s.JsonAST.JValue
 import org.json4s.native.JsonMethods._
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Component
 
 /**
   * @author Romesh Selvan
   */
-@Component
-@Autowired
 class MessageProcessor(m : MailSenderServiceProducer) {
 
   implicit val formats = DefaultFormats

@@ -3,14 +3,10 @@ package com.romeshselvan.processors
 import com.amazonaws.services.sqs.AmazonSQSAsyncClient
 import com.amazonaws.services.sqs.model.{DeleteMessageRequest, Message}
 import com.romeshselvan.defaults.SystemValues
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Component
 
 /**
   * @author Romesh Selvan
   */
-@Component
-@Autowired
 class MessageDeleter(a : AmazonSQSAsyncClient) {
 
   val amazonSQSAsyncClient: AmazonSQSAsyncClient = a

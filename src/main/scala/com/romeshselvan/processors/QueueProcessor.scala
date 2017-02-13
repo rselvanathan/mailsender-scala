@@ -3,14 +3,10 @@ package com.romeshselvan.processors
 import com.amazonaws.services.sqs.AmazonSQSAsyncClient
 import com.amazonaws.services.sqs.model.{Message, ReceiveMessageRequest}
 import com.romeshselvan.defaults.SystemValues
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Component
 
 /**
   * @author Romesh Selvan
   */
-@Component
-@Autowired
 class QueueProcessor(a : AmazonSQSAsyncClient, m : MessageProcessor, d : MessageDeleter) extends Runnable{
 
   val amazonSQSAsyncClient : AmazonSQSAsyncClient = a
