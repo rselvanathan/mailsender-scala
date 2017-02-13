@@ -2,13 +2,14 @@ package producers
 
 import java.util.Properties
 
+import com.google.inject.{AbstractModule, Provides}
 import org.springframework.mail.MailSender
 import org.springframework.mail.javamail.JavaMailSenderImpl
 
 /**
   * @author Romesh Selvan
   */
-class MailSenderProducer {
+object MailSenderProducer extends AbstractModule{
 
   val host : Option[String] = sys.env.get("MAIL_HOST")
   val port : Option[String] = sys.env.get("MAIL_PORT")
@@ -18,7 +19,10 @@ class MailSenderProducer {
   if(host.isEmpty || port.isEmpty || username.isEmpty || password.isEmpty)
     throw new IllegalArgumentException("A Mail property is missing. Application cannot start without it.")
 
-  def produceMailSender: MailSender = {
+  override def configure(): Unit = {}
+
+  @Provides
+  def mailSender : MailSender = {
     val javaMailSender = new JavaMailSenderImpl
     javaMailSender.setHost(host.get)
     javaMailSender.setPort(port.get.toInt)
@@ -30,5 +34,4 @@ class MailSenderProducer {
     javaMailSender.setJavaMailProperties(properties)
     javaMailSender
   }
-
 }

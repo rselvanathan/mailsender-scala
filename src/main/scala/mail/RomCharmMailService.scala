@@ -13,7 +13,7 @@ class RomCharmMailService(mc : MailSender) extends MailSenderService {
 
   val mailSender : MailSender = mc
 
-  override def sendMail(email: RomCharmEmail): Unit = {
+  override def sendMail(email: T): Unit = {
     val mailMessage = new SimpleMailMessage()
     mailMessage.setFrom("romeshselvan@hotmail.co.uk")
     mailMessage.setTo(email.email)
@@ -22,7 +22,7 @@ class RomCharmMailService(mc : MailSender) extends MailSenderService {
     mailSender.send(mailMessage)
   }
 
-  private def generateTemplateMessage(email : RomCharmEmail) : String = {
+  private def generateTemplateMessage(email : T) : String = {
     val builder = new StringBuilder
     builder.append("Hey ").append(email.firstName).append("\n")
     builder.append("\n")

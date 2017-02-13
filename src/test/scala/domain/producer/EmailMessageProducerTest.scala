@@ -1,6 +1,10 @@
-package domain
+package domain.producer
 
-import defaults.{AppType, ROMCHARM}
+import defaults.AppType
+import defaults.AppType.ROMCHARM
+import domain.{Email, RomCharmEmail}
+import org.json4s.JsonAST.JValue
+import org.json4s.native.JsonMethods._
 import org.scalatest.{FunSuite, Matchers}
 
 class EmailMessageProducerTest extends FunSuite with Matchers {
@@ -11,15 +15,13 @@ class EmailMessageProducerTest extends FunSuite with Matchers {
   val AREATTENDING : Boolean = true
   val NUMBERATTENDING : Int = 2
 
-  val emailMessageProducer : EmailMessageProducer = new EmailMessageProducer
-
   test("If AppType is RomCharm then return a RomCharmEmail Object with all the fields mapped correctly") {
 
-    val json : String = getDefaultRomCharmJson
+    val json : JValue = parse(getDefaultRomCharmJson)
     val appType : AppType = ROMCHARM
     val expected : RomCharmEmail = getDefaultRomCharmMailObject
 
-    val emailMessage : Email = emailMessageProducer.produceEmailMessage(appType, json)
+    val emailMessage : Email = EmailMessageProducer(appType, json \ "Message")
 
     emailMessage should be (a [RomCharmEmail])
     val result = emailMessage.asInstanceOf[RomCharmEmail]
@@ -31,6 +33,6 @@ class EmailMessageProducerTest extends FunSuite with Matchers {
   }
 
   private def getDefaultRomCharmJson : String = {
-    s"""{"email": "$EMAIL", "firstName" : "$FIRSTNAME", "lastName" : "$LASTNAME", "areAttending" : $AREATTENDING, "numberAttending" : $NUMBERATTENDING}"""
+    s"""{"Message":"{\\\"email\\\":\\\"$EMAIL\\\",\\\"firstName\\\":\\\"$FIRSTNAME\\\",\\\"lastName\\\":\\\"$LASTNAME\\\",\\\"areAttending\\\":$AREATTENDING,\\\"numberAttending\\\":$NUMBERATTENDING}"}"""
   }
 }
