@@ -28,14 +28,14 @@ class MessageDeleterTest extends FunSuite with Matchers with MockitoSugar with B
   val messageDeleter = new MessageDeleter(amazonSQSClient)
 
   test("When List of messages is empty then do not delete any of the messages") {
-    messageDeleter.deleteMessages(Collections.emptyList())
+    messageDeleter.deleteMessages(List.empty)
     verify(amazonSQSClient, never).deleteMessage(any[DeleteMessageRequest])
   }
 
   test("When List of messages has items then call delete on all of the messages") {
     val receiptIdOne = "receiptIdOne"
     val receiptIdTwo = "receiptIdTwo"
-    messageDeleter.deleteMessages(util.Arrays.asList(getMessage(receiptIdOne), getMessage(receiptIdTwo)))
+    messageDeleter.deleteMessages(List(getMessage(receiptIdOne), getMessage(receiptIdTwo)))
 
     val expectedDeleteMessageRequestOne = new DeleteMessageRequest(SystemValues.AWS_SQS_QUEUE_URL, receiptIdOne)
     val expectedDeleteMessageRequestTwo = new DeleteMessageRequest(SystemValues.AWS_SQS_QUEUE_URL, receiptIdTwo)

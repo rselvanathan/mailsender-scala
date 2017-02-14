@@ -17,8 +17,8 @@ class MessageProcessor(m : MailSenderServiceProducer) {
   implicit val formats = DefaultFormats
   val mailSenderServiceProducer: MailSenderServiceProducer = m
 
-  def processMessages(messages : java.util.List[Message]): Unit = {
-    messages.forEach(sendMail)
+  def processMessages(messages : Seq[Message]): Unit = {
+    messages.foreach(sendMail)
   }
 
   private def sendMail(message : Message) : Unit = {

@@ -11,8 +11,8 @@ class MessageDeleter(a : AmazonSQSAsyncClient) {
 
   val amazonSQSAsyncClient: AmazonSQSAsyncClient = a
 
-  def deleteMessages(messages: java.util.List[Message]) : Unit = {
-    messages.forEach(m => {
+  def deleteMessages(messages: Seq[Message]) : Unit = {
+    messages.foreach(m => {
       val request = new DeleteMessageRequest().withQueueUrl(SystemValues.AWS_SQS_QUEUE_URL).withReceiptHandle(m.getReceiptHandle)
       amazonSQSAsyncClient.deleteMessage(request)
     })

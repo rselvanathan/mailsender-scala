@@ -29,7 +29,7 @@ class MessageProcessorTest extends FunSuite  with Matchers with MockFactory {
 
   test("When processing messages and there is nothing to process, then do nothing") {
     before
-    messageProcesser.processMessages(Collections.emptyList())
+    messageProcesser.processMessages(List.empty)
     (mailSenderService.sendMail _).verify(*).never()
   }
 
@@ -37,7 +37,7 @@ class MessageProcessorTest extends FunSuite  with Matchers with MockFactory {
     before
     val message : Message = new Message().withBody(getDefaultSQSJsonBody("ROMCHARM"))
     val expectedEmail : RomCharmEmail = getDefaultEmail
-    messageProcesser.processMessages( Collections.singletonList(message))
+    messageProcesser.processMessages(List(message))
     (mailSenderService.sendMail _).verify(expectedEmail.asInstanceOf[mailSenderService.T])
   }
 
