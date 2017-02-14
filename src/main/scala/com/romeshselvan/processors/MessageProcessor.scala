@@ -12,10 +12,9 @@ import org.json4s.native.JsonMethods._
 /**
   * @author Romesh Selvan
   */
-class MessageProcessor(m : MailSenderServiceProducer) {
+class MessageProcessor(mailSenderServiceProducer : MailSenderServiceProducer) {
 
   implicit val formats = DefaultFormats
-  val mailSenderServiceProducer: MailSenderServiceProducer = m
 
   def processMessages(messages : Seq[Message]): Unit = {
     messages.foreach(sendMail)

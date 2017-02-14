@@ -3,6 +3,8 @@ package com.romeshselvan.processors
 import com.amazonaws.services.sqs.AmazonSQSAsyncClient
 import com.amazonaws.services.sqs.model.{Message, ReceiveMessageRequest}
 import com.romeshselvan.defaults.SystemValues
+import com.typesafe.scalalogging.Logger
+
 import scala.collection.JavaConverters._
 
 /**
@@ -10,6 +12,7 @@ import scala.collection.JavaConverters._
   */
 class QueueProcessor(a : AmazonSQSAsyncClient, m : MessageProcessor, d : MessageDeleter) extends Runnable{
 
+  val logger = Logger("QueueProcessor")
   val amazonSQSAsyncClient : AmazonSQSAsyncClient = a
   val messageProcessor : MessageProcessor = m
   val messageDeleter : MessageDeleter = d
@@ -19,6 +22,7 @@ class QueueProcessor(a : AmazonSQSAsyncClient, m : MessageProcessor, d : Message
     val messages : Seq[Message] = amazonSQSAsyncClient.receiveMessage(request).getMessages.asScala
     if(messages.isEmpty)
       return
+    logger.info(s"Number of message retrieved : ${messages.size}")
     messageProcessor.processMessages(messages)
     messageDeleter.deleteMessages(messages)
   }

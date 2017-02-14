@@ -11,6 +11,7 @@ libraryDependencies += "javax.mail" % "javax.mail-api" % "1.5.6"
 libraryDependencies += "com.amazonaws" % "aws-java-sdk-sqs" % "1.11.78"
 libraryDependencies += "org.json4s" % "json4s-native_2.12" % "3.5.0"
 libraryDependencies += "com.beachape" % "enumeratum_2.12" % "1.5.7"
+libraryDependencies += "com.typesafe.scala-logging" %% "scala-logging" % "3.5.0"
 
 // Test
 libraryDependencies += "org.mockito" % "mockito-all" % "1.9.5" % "test"
