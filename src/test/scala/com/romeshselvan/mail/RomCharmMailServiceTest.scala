@@ -1,9 +1,9 @@
 package com.romeshselvan.mail
 
 import com.romeshselvan.domain.RomCharmEmail
+import com.romeshselvan.mailer.{MailMessage, Mailer}
 import org.scalamock.scalatest.MockFactory
 import org.scalatest.{FunSuite, Matchers}
-import org.springframework.mail.{MailSender, SimpleMailMessage}
 
 /**
   * @author Romesh Selvan
@@ -16,7 +16,7 @@ class RomCharmMailServiceTest extends FunSuite with Matchers with MockFactory{
   val AREATTENDING : Boolean = true
   val NUMBERATTENDING : Int = 2
 
-  val mailSender : MailSender = stub[MailSender]
+  val mailSender : Mailer = stub[Mailer]
   val mailSenderService : MailSenderService = new RomCharmMailService(mailSender)
 
   test("Expect the default template message to be sent when passing in a RomCharmEmail object") {
@@ -28,13 +28,8 @@ class RomCharmMailServiceTest extends FunSuite with Matchers with MockFactory{
 
   private def getDefaultEmail = RomCharmEmail(EMAIL, FIRSTNAME, LASTNAME, AREATTENDING, NUMBERATTENDING)
 
-  private def getDefaultSimpleMessage : SimpleMailMessage = {
-    val mailMessage = new SimpleMailMessage()
-    mailMessage.setFrom("romeshselvan@hotmail.co.uk")
-    mailMessage.setTo(EMAIL)
-    mailMessage.setSubject("RSVP Confirmation - Romesh & Charmikha")
-    mailMessage.setText(generateDefaultTemplateMessage)
-    mailMessage
+  private def getDefaultSimpleMessage : MailMessage = {
+    MailMessage("romeshselvan@hotmail.co.uk", EMAIL, "RSVP Confirmation - Romesh & Charmikha", generateDefaultTemplateMessage)
   }
 
   private def generateDefaultTemplateMessage : String = {

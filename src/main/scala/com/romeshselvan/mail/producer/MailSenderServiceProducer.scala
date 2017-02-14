@@ -3,7 +3,7 @@ package com.romeshselvan.mail.producer
 import com.romeshselvan.defaults.AppType
 import com.romeshselvan.defaults.AppType.ROMCHARM
 import com.romeshselvan.mail.{MailSenderService, RomCharmMailService}
-import com.romeshselvan.producers.MailSenderProducer
+import com.romeshselvan.producers.MailerProducer
 
 /**
   * @author Romesh Selvan
@@ -16,6 +16,6 @@ trait MailSenderServiceProducer {
 object MailSenderServiceProducer extends MailSenderServiceProducer{
 
   def apply(appType : AppType) : MailSenderService = appType match {
-    case ROMCHARM => new RomCharmMailService(MailSenderProducer.mailSender)
+    case ROMCHARM => new RomCharmMailService(MailerProducer.mailSender)
   }
 }

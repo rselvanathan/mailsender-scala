@@ -1,25 +1,21 @@
 package com.romeshselvan.mail
 
 import com.romeshselvan.domain.RomCharmEmail
+import com.romeshselvan.mailer.{MailMessage, Mailer}
 import com.typesafe.scalalogging.Logger
-import org.springframework.mail.{MailSender, SimpleMailMessage}
 
 
 /**
   * @author Romesh Selvan
   */
-class RomCharmMailService(mailSender : MailSender) extends MailSenderService {
+class RomCharmMailService(mailSender : Mailer) extends MailSenderService {
   type T = RomCharmEmail
 
   val logger = Logger("RomCharmMailService")
 
   override def sendMail(email: T): Unit = {
-    val mailMessage = new SimpleMailMessage()
     logger.info(s"Sending Mail with details ${email.toString}")
-    mailMessage.setFrom("romeshselvan@hotmail.co.uk")
-    mailMessage.setTo(email.email)
-    mailMessage.setSubject("RSVP Confirmation - Romesh & Charmikha")
-    mailMessage.setText(generateTemplateMessage(email))
+    val mailMessage = MailMessage("romeshselvan@hotmail.co.uk", email.email, "RSVP Confirmation - Romesh & Charmikha", generateTemplateMessage(email))
     mailSender.send(mailMessage)
   }
 
