@@ -8,7 +8,7 @@ import com.romeshselvan.producers.{AmazonSQSProducer, ExecutorServiceProducer}
   * @author Romesh Selvan
   */
 object QueueRunnerProducer {
-  def apply : QueueRunner  = {
+  def apply = {
     val messageProcessor = new MessageProcessor(MailSenderServiceProducer)
     val messageDeleter = new MessageDeleter(AmazonSQSProducer.amazonSQSClient)
     val queueProcessor = new QueueProcessor(AmazonSQSProducer.amazonSQSClient, messageProcessor, messageDeleter)

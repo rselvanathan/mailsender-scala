@@ -16,18 +16,18 @@ class MessageProcessor(mailSenderServiceProducer : MailSenderServiceProducer) {
 
   implicit val formats = DefaultFormats
 
-  def processMessages(messages : Seq[Message]): Unit = {
+  def processMessages(messages : Seq[Message]) = {
     messages.foreach(sendMail)
   }
 
-  private def sendMail(message : Message) : Unit = {
+  private def sendMail(message : Message) = {
     val bodyJValue : JValue = parse(message.getBody)
     val appType = getAppType(bodyJValue \ "MessageAttributes")
     val senderService : MailSenderService = mailSenderServiceProducer(appType)
     senderService.sendMail(EmailMessageProducer(appType, bodyJValue \ "Message").asInstanceOf[senderService.T])
   }
 
-  private def getAppType(messageAttrJson: JValue) : AppType = {
+  private def getAppType(messageAttrJson: JValue) = {
     val messageAttrs : Map[String, Map[String, String]] = messageAttrJson.extract[Map[String, Map[String, String]]]
     val appTypeString : String = messageAttrs("apptype")("Value")
     AppType.withName(appTypeString)

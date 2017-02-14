@@ -10,10 +10,5 @@ import com.romeshselvan.defaults.SystemValues
   */
 object AmazonSQSProducer {
 
-  val amazonSQSClient : AmazonSQSAsyncClient = {
-    val client : AmazonSQSAsyncClient =
-      new AmazonSQSAsyncClient(new BasicAWSCredentials(SystemValues.AWS_ACCESS_KEY, SystemValues.AWS_SECRET_KEY))
-    client.setRegion(Region.getRegion(Regions.EU_WEST_1))
-    client
-  }
+  val amazonSQSClient = new AmazonSQSAsyncClient(new BasicAWSCredentials(SystemValues.AWS_ACCESS_KEY, SystemValues.AWS_SECRET_KEY)).withRegion(Region.getRegion(Regions.EU_WEST_1))
 }

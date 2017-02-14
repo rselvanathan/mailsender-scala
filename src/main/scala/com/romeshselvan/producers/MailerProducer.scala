@@ -11,7 +11,7 @@ import com.romeshselvan.mailer.{MailConfig, Mailer}
   */
 object MailerProducer {
 
-  val mailSender : Mailer = {
+  val mailSender = {
     val prop = new Properties()
     prop.put("mail.transport.protocol", "smtp")
     prop.put("mail.smtp.starttls.enable", "true")

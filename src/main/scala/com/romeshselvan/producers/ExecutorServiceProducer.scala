@@ -7,5 +7,5 @@ import java.util.concurrent.{Executors, ScheduledExecutorService}
   */
 object ExecutorServiceProducer {
 
-   val scheduledExecutorService : ScheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
+   val scheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
 }

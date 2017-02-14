@@ -15,7 +15,7 @@ trait MailSenderServiceProducer {
 
 object MailSenderServiceProducer extends MailSenderServiceProducer{
 
-  def apply(appType : AppType) : MailSenderService = appType match {
+  override def apply(appType : AppType) : MailSenderService = appType match {
     case ROMCHARM => new RomCharmMailService(MailerProducer.mailSender)
   }
 }
