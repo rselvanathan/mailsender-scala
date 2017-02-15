@@ -1,0 +1,31 @@
+notifications:
+  email:
+    recipients:
+     - romesh69@hotmail.com
+
+    on_success: never
+    on_failure: change
+
+# safelist
+branches:
+  only:
+  - master
+
+language: scala
+sudo: required
+services:
+  - docker
+
+# Build the Java app
+jdk:
+  - oraclejdk8
+script: sbt assembly
+
+#Build the Docker image and push to registry
+after_success:
+  - docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
+  - docker build -t rselvanathan/mailsender-scala:latest .
+  - docker push rselvanathan/mailsender-scala
+  # Deploy to instance
+  - openssl aes-256-cbc -K "$ENCRYPT_K" -iv "$ENCRYPT_IV" -in "./deploy_key.enc" -out "./deploy_key" -d
+  - chmod 600 ./deploy_key && ssh -o StrictHostKeyChecking=no -i ./deploy_key $SSH_USER@$SSH_IP './deploy-mailsender-scala.sh'
