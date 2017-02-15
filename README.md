@@ -13,7 +13,7 @@ This version is the current active version being used in my Instances.
 The AWS SQS is polled at a given interval. The application itself is currently synchronous, but may be extended to be 
 asynchronous in the future (The Java version is Asynchronous).
 
-Tech Used : AWS SQS, Scala
+Tech Used : AWS SQS, Scala, Docker
 
 ###Docker Usage
 
